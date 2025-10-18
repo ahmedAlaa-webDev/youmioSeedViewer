@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "youmio Seed Viewer",
+  "version": "1.0.0",
+  "description": "View youmio Seed listed for sale from OpenSea collections",
+  "permissions": [
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "https://api.opensea.io/*",
+    "https://staking.youmio.ai/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "panel.html"
+  },
+  "commands": {
+    "show-nfts": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+N",
+        "mac": "Command+Shift+N"
+      },
+      "description": "Show NFTs for Sale"
+    }
+  },
+  "action": {
+    "default_title": "youmio Seed Viewer"
+  },
+  "icons": {
+
+  }
+}
