@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "youmio Seed Viewer",
+  "name": "Youmio Seed Viewer",
   "version": "1.0.0",
-  "description": "View youmio Seed listed for sale from OpenSea collections",
+  "description": "View Youmio Seed NFTs (Mythic & Ancient) with staking points from OpenSea",
   "permissions": [
     "sidePanel"
   ],
@@ -26,7 +26,7 @@
     }
   },
   "action": {
-    "default_title": "youmio Seed Viewer"
+    "default_title": "Youmio Seed Viewer"
   },
   "icons": {
 
