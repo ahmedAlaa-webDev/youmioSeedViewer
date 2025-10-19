@@ -2,6 +2,7 @@
 const fetchButton = document.getElementById('fetchButton');
 const nftTypeSelect = document.getElementById('nftTypeSelect');
 const sortSelect = document.getElementById('sortSelect');
+const filterZeroPointsBtn = document.getElementById('filterZeroPointsBtn');
 const loadingDiv = document.getElementById('loading');
 const errorDiv = document.getElementById('error');
 const nftGrid = document.getElementById('nftGrid');
@@ -13,6 +14,7 @@ let currentCollectionSlug = '';
 let imgCache = new Map(); // cache the images so we don't load them again
 let pendingImgRequests = new Map(); // track ongoing requests
 let pointsCache = new Map(); // cache staking points
+let hideZeroPoints = false; // filter state
 
 // API stuff
 const OPENSEA_API_BASE = 'https://api.opensea.io/api/v2';
@@ -305,24 +307,34 @@ async function displayNFTs(listings) {
   
   nftGrid.innerHTML = '';
   
-  if (listings.length === 0) {
+  // filter based on toggle state
+  let displayListings = listings;
+  if (hideZeroPoints) {
+    displayListings = listings.filter(listing => {
+      return listing.stakingPoints && listing.stakingPoints > 0;
+    });
+    console.log(`Filtered: ${listings.length} → ${displayListings.length} NFTs (removed ${listings.length - displayListings.length} with 0 points)`);
+  }
+  
+  if (displayListings.length === 0) {
+    nftGrid.innerHTML = '';
     emptyState.classList.remove('hidden');
     return;
   }
   
   emptyState.classList.add('hidden');
   
-  for (const listing of listings) {
+  for (const listing of displayListings) {
     const card = await createNFTCard(listing);
     nftGrid.appendChild(card);
   }
   
-  const imagePromises = listings.map(async (listing) => {
+  const imagePromises = displayListings.map(async (listing) => {
     const imageUrl = await getImageUrl(listing);
     listing.cachedImageUrl = imageUrl;
   });
   
-  const pointsPromises = listings.map(async (listing) => {
+  const pointsPromises = displayListings.map(async (listing) => {
     const tokenId = getTokenId(listing);
     const nftType = listing.nftType;
     if (tokenId && nftType) {
@@ -334,7 +346,7 @@ async function displayNFTs(listings) {
   await Promise.all([...imagePromises, ...pointsPromises]);
   
   const sortType = sortSelect.value;
-  const sorted = sortListings([...listings], sortType);
+  const sorted = sortListings([...displayListings], sortType);
   nftGrid.innerHTML = '';
   
   for (let i = 0; i < sorted.length; i++) {
@@ -395,6 +407,24 @@ async function loadNFTs() {
 
 fetchButton.addEventListener('click', loadNFTs);
 nftTypeSelect.addEventListener('change', loadNFTs);
+
+// filter toggle button
+filterZeroPointsBtn.addEventListener('click', () => {
+  hideZeroPoints = !hideZeroPoints;
+  
+  if (hideZeroPoints) {
+    filterZeroPointsBtn.classList.add('active');
+    filterZeroPointsBtn.innerHTML = '👁️ Show 0 Points';
+  } else {
+    filterZeroPointsBtn.classList.remove('active');
+    filterZeroPointsBtn.innerHTML = '🚫 Hide 0 Points';
+  }
+  
+  // re-display with filter applied
+  if (currentListings.length > 0) {
+    displayNFTs(currentListings);
+  }
+});
 
 sortSelect.addEventListener('change', async () => {
   if (currentListings.length === 0) return;

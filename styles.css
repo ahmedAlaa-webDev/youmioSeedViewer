@@ -104,6 +104,26 @@ body {
   transform: translateY(0);
 }
 
+.controls button:active {
+  transform: scale(0.95);
+}
+
+/* Filter Button Styles */
+.filter-btn {
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%) !important;
+  box-shadow: 0 4px 12px rgba(127, 140, 141, 0.3) !important;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4) !important;
+  transform: scale(1.05);
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
 .detect-btn {
   padding: 12px 20px;
   background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
@@ -482,4 +502,27 @@ body {
     width: 100%;
     margin: 0 auto;
   }
+}
+
+/* Filter Button Styles */
+.filter-btn {
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%) !important;
+  box-shadow: 0 4px 12px rgba(127, 140, 141, 0.3) !important;
+  padding: 12px 20px !important;
+  border-radius: 8px !important;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4) !important;
+  transform: scale(1.05);
+}
+
+.filter-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(219, 16, 16, 0.4) !important;
+}
+
+.filter-btn.active:hover {
+  box-shadow: 0 6px 16px rgba(46, 204, 113, 0.5) !important;
 }

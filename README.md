@@ -4,14 +4,14 @@ Chrome extension to view and analyze Youmio Seed NFT collections (Mythic and Anc
 
 ## Features
 
-- 🖼️ View Mythic and Ancient Seed NFTs from OpenSea
-- 💰 Display NFT prices in ETH
-- ⭐ Show staking points for each NFT
-- 📊 Calculate points per ETH ratio (Best Deal finder)
-- 🔄 Smart caching (images & points don't reload)
-- 🔥 Highlight best deals
-- 📱 Beautiful responsive UI
-- ⚡ Fast loading with optimized requests
+-  View Mythic and Ancient Seed NFTs from OpenSea
+-  Display NFT prices in ETH
+-  Show staking points for each NFT
+-  Calculate points per ETH ratio (Best Deal finder)
+-  Smart caching (images & points don't reload)
+-  Highlight best deals
+-  Beautiful responsive UI
+-  Fast loading with optimized requests
 
 ## Installation
 
@@ -23,7 +23,7 @@ Chrome extension to view and analyze Youmio Seed NFT collections (Mythic and Anc
 6. Get your OpenSea API key from [OpenSea Docs](https://docs.opensea.io/reference/api-keys)
 7. Add your API key in `panel.js`:
    ```javascript
-   const API_KEY = 'your-api-key-here';
+   const API_KEY = 'fdae3233ff1545ab8d5d7041e90ed89a';
    ```
 
 ## Usage
@@ -120,7 +120,6 @@ Chrome extension to view and analyze Youmio Seed NFT collections (Mythic and Anc
 - Creates placeholder cards first
 - Loads images and points in parallel
 - Re-sorts and displays final cards
-- Highlights best deal with 🔥 badge
 
 **`showError(message)`**
 - Displays error message for 5 seconds
